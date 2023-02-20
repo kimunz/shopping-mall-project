@@ -49,16 +49,16 @@ public class TokenProvider implements InitializingBean {
 
     //Authentication 객체의 권한정보를 이용해서 토큰을 생성하는 메소드
     public String createToken(Authentication authentication) {
-        String authority = authentication.getAuthorities().stream()
+        String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .toString();
+                .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
         return Jwts.builder()
                 .setSubject(authentication.getName())
-                .claim(AUTHORITY_KEY, authority)
+                .claim(AUTHORITY_KEY, authorities)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -74,14 +74,16 @@ public class TokenProvider implements InitializingBean {
                 .getBody();
         // 토큰을 이용해 클레임을 만들고
 
-        Collection<? extends GrantedAuthority> authority =
-                (Collection<? extends GrantedAuthority>) claims.get(AUTHORITY_KEY);
+        Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get(AUTHORITY_KEY).toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
         // 클레임에서 권한정보를 빼내서
 
-        User principal = new User(claims.getSubject(), "", authority);
+        User principal = new User(claims.getSubject(), "", authorities);
         // 권한정보를 이용해 유저객체를 만들어 줌
 
-       return new UsernamePasswordAuthenticationToken(principal, token, authority);
+       return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     public boolean validateToken(String token) {
