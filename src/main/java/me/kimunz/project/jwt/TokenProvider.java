@@ -57,8 +57,8 @@ public class TokenProvider implements InitializingBean {
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITY_KEY, authorities)
+                .setSubject(authentication.getName())   //사용자 아이디를 sub로 설정
+                .claim(AUTHORITY_KEY, authorities)  //payload에 authorities를 포함
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -68,7 +68,7 @@ public class TokenProvider implements InitializingBean {
         //claim은 payload내에 담긴 정보
         Claims claims = Jwts
                 .parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(key)//서명 검증을 위한 secretKey
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
