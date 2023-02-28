@@ -1,7 +1,7 @@
 package me.kimunz.project.service;
 
 import me.kimunz.project.entity.User;
-import me.kimunz.project.repository.UserRepository;
+import me.kimunz.project.mapper.UserMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findOneWithAuthoritiesByUsername(username)
+        return userMapper.findOneWithAuthoritiesByUsername(username)
                 .map(user -> createUser(username, user))
                 .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
     }
