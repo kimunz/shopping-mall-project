@@ -62,6 +62,7 @@ public class SecurityConfig {
                 .antMatchers("/api/hello").permitAll() //이 요청은 인증없이 접근 허용
                 .antMatchers("/api/authenticate").permitAll() //이 요청은 인증없이 접근 허용
                 .antMatchers("/api/signup").permitAll() //이 요청은 인증없이 접근 허용
+                .antMatchers("/resources/**","/", "/css/**", "/js/**", "/images/**", "/webfonts/**").permitAll()
                 .anyRequest().authenticated() //나머지 요청에 대해서는 인증을 받아야 함
 
                 .and()
@@ -73,6 +74,6 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
-                .antMatchers("/h2-console/**", "/favicon.ico");
+                .antMatchers("/favicon.ico");
     }
 }
