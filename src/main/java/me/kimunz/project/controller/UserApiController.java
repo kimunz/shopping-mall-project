@@ -11,10 +11,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class UserApiController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserApiController(UserService userService) {
         this.userService = userService;
     }
 

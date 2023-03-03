@@ -20,11 +20,11 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class AuthController {
+public class AuthApiController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    public AuthApiController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
