@@ -59,11 +59,9 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests() //HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
-                .antMatchers("/api/hello").permitAll() //이 요청은 인증없이 접근 허용
                 .antMatchers("/api/authenticate").permitAll() //이 요청은 인증없이 접근 허용
                 .antMatchers("/api/signup").permitAll() //이 요청은 인증없이 접근 허용
-                .antMatchers("/", "/resources/**", "/images/**").permitAll()
-                .antMatchers("/details").permitAll()
+                .antMatchers("/api/product/**").permitAll()
                 .anyRequest().authenticated() //나머지 요청에 대해서는 인증을 받아야 함
 
                 .and()

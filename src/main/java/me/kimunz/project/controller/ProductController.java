@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class ProductController {
@@ -18,8 +20,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product/{id}")
-    public ResponseEntity<Product> details(@PathVariable String id) {
-        return ResponseEntity.ok(productService.getProductById(id).get());
+    @GetMapping("/product")
+    public ResponseEntity<List> getProductList() {
+        return ResponseEntity.ok(productService.getProductList());
+    }
+
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
+        return ResponseEntity.ok(productService.getProductById(productId).get());
     }
 }
