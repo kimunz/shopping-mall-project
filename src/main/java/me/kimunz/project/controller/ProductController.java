@@ -1,12 +1,11 @@
 package me.kimunz.project.controller;
 
+import me.kimunz.project.dto.ProductDto;
 import me.kimunz.project.entity.Product;
 import me.kimunz.project.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,12 @@ public class ProductController {
     @GetMapping("/product")
     public ResponseEntity<List> getProductList() {
         return ResponseEntity.ok(productService.getProductList());
+    }
+
+    @PostMapping("/product")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<Integer> addProduct(@RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.addProduct(productDto));
     }
 
     @GetMapping("/product/{productId}")

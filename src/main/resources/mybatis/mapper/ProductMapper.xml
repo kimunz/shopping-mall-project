@@ -10,6 +10,12 @@
         <result property="stock" column="stock"/>
         <result property="price" column="price"/>
     </resultMap>
+    <insert id="addProduct">
+        insert
+        into
+        product(product_name, product_type, description, stock, price)
+        values(#{productName}, #{productType}, #{description}, #{stock}, #{price})
+    </insert>
     <select id="getProductList" resultMap="productMap">
         select * from product
     </select>

@@ -1,5 +1,6 @@
 package me.kimunz.project.service;
 
+import me.kimunz.project.dto.ProductDto;
 import me.kimunz.project.entity.Product;
 import me.kimunz.project.mapper.ProductMapper;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,9 @@ public class ProductService {
     }
     public Optional<Product> getProductById(Long productId) {
         return productMapper.getProductById(productId);
+    }
+
+    public int addProduct(ProductDto productDto) {
+        return productMapper.addProduct(productDto);
     }
 }
