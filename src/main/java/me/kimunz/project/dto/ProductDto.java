@@ -15,9 +15,6 @@ import javax.validation.constraints.Size;
 public class ProductDto {
 
     @NotNull
-    private Long productId;
-
-    @NotNull
     @Size(min = 3, max = 50)
     private String productType;
 

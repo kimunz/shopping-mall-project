@@ -28,8 +28,8 @@ public class ProductService {
         return productMapper.addProduct(productDto);
     }
 
-    public int updateProduct(ProductDto productId) {
-        return productMapper.updateProduct(productId);
+    public int updateProduct(Long productId, ProductDto productDto) {
+        return productMapper.updateProduct(productId, productDto);
     }
 
     public int deleteProduct(Long productId) {

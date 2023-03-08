@@ -28,8 +28,8 @@
         update
         product
         set
-        product_name = #{productName}, product_type = #{productType},
-        description = #{description}, stock = #{stock}, price = #{price}
+        product_name = #{productDto.productName}, product_type = #{productDto.productType},
+        description = #{productDto.description}, stock = #{productDto.stock}, price = #{productDto.price}
         where product_id = #{productId}
     </update>
     <delete id="deleteProduct">

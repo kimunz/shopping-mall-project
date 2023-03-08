@@ -37,8 +37,8 @@ public class ProductController {
 
     @PutMapping("/product/{productId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<Integer> updateProduct(@RequestBody ProductDto productDto) {
-        return ResponseEntity.ok(productService.updateProduct(productDto));
+    public ResponseEntity<Integer> updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.updateProduct(productId, productDto));
     }
 
     @DeleteMapping("/product/{productId}")
