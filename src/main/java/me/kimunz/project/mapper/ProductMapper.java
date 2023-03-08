@@ -13,4 +13,6 @@ public interface ProductMapper {
     List<Product> getProductList();
     Optional<Product> getProductById(Long productId);
     int addProduct(ProductDto productDto);
+    int updateProduct(ProductDto productId);
+    int deleteProduct(Long productId);
 }

@@ -24,14 +24,26 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductList());
     }
 
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
+        return ResponseEntity.ok(productService.getProductById(productId).get());
+    }
+
     @PostMapping("/product")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Integer> addProduct(@RequestBody ProductDto productDto) {
         return ResponseEntity.ok(productService.addProduct(productDto));
     }
 
-    @GetMapping("/product/{productId}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok(productService.getProductById(productId).get());
+    @PutMapping("/product/{productId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<Integer> updateProduct(@RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.updateProduct(productDto));
+    }
+
+    @DeleteMapping("/product/{productId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<Integer> deleteProduct(@PathVariable Long productId) {
+        return ResponseEntity.ok(productService.deleteProduct(productId));
     }
 }

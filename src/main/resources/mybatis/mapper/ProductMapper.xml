@@ -24,4 +24,16 @@
         from product
         where product_id = #{productId}
     </select>
+    <update id="updateProduct">
+        update
+        product
+        set
+        product_name = #{productName}, product_type = #{productType},
+        description = #{description}, stock = #{stock}, price = #{price}
+        where product_id = #{productId}
+    </update>
+    <delete id="deleteProduct">
+        delete from product
+        where product_id = #{productId}
+    </delete>
 </mapper>
