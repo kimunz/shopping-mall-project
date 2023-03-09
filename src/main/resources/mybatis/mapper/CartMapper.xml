@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.kimunz.project.mapper.CartMapper">
+    <resultMap id="cartMap" type="me.kimunz.project.entity.Cart">
+        <result property="cartId" column="cart_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="count" column="count"/>
+    </resultMap>
+    <insert id="addCart">
+        insert
+        into
+        cart(user_id, product_id, count)
+        values(#{userId}, #{productId}, #{count})
+    </insert>
+    <select id="getCartList" resultMap="cartMap">
+        select * from cart
+        where user_id = #{userId}
+    </select>
+    <delete id="deleteCart">
+        delete from cart
+        where cart_id = #{cartId}
+    </delete>
+</mapper>
