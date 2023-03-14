@@ -11,4 +11,6 @@ public interface CartMapper {
     List<Cart> getCartList(Long userId);
 
     int addCart(CartDto cartDto);
+
+    Object deleteCart(Long cartId);
 }

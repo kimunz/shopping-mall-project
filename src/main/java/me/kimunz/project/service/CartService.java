@@ -23,4 +23,8 @@ public class CartService {
     public int addCart(CartDto cartDto) {
         return cartMapper.addCart(cartDto);
     }
+
+    public Object deleteCart(Long cartId) {
+        return cartMapper.deleteCart(cartId);
+    }
 }

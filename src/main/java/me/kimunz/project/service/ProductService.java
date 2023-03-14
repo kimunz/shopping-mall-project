@@ -20,6 +20,7 @@ public class ProductService {
     public List<Product> getProductList() {
         return productMapper.getProductList();
     }
+
     public Optional<Product> getProductById(Long productId) {
         return productMapper.getProductById(productId);
     }
